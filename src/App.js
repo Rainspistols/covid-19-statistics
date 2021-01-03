@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import { sortData } from './components/utils';
+// Maaterial UI
+import { FormControl, Select, MenuItem, Card, CardContent } from '@material-ui/core';
 // Components
 import InfoBox from './components/InfoBox';
 import Map from './components/Map';
-// Maaterial UI
-import { FormControl, Select, MenuItem, Card, CardContent } from '@material-ui/core';
+import Table from './components/Table';
+import LineGraph from './components/LineGraph';
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('worldwide');
   const [countryInfo, setCountryInfo] = useState({});
+  const [tableData, setTableData] = useState([]);
 
   const allDiseasesUlr = 'https://disease.sh/v3/covid-19/countries';
 
@@ -21,6 +25,10 @@ function App() {
           setCountryInfo(data);
         });
 
+    getAllCountriesInfo();
+  });
+
+  useEffect(() => {
     const getCountriesData = async () => {
       await fetch(allDiseasesUlr)
         .then((response) => response.json())
@@ -30,11 +38,12 @@ function App() {
             value: country.countryInfo.iso2,
           }));
 
+          const sortedData = sortData(data);
+          setTableData(sortedData);
           setCountries(countries);
         });
     };
 
-    getAllCountriesInfo();
     getCountriesData();
   }, []);
 
@@ -90,7 +99,9 @@ function App() {
       <Card className="app__right">
         <CardContent>
           <h3>Live Cases by Country</h3>
-          <h3>Worldwide new cases</h3>
+          <Table countries={tableData} />
+          <h3>Worldwide new cases for last 120 days</h3>
+          <LineGraph />
         </CardContent>
         {/* Table */}
         {/* Graph */}
@@ -101,4 +112,4 @@ function App() {
 
 export default App;
 
-// BEM, React, Css, Js,
+// BEM, React, Css, Js, react-chartjs-2
