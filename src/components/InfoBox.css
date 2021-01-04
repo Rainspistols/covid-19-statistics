@@ -1,0 +1,58 @@
+:root {
+  --red: #cc1034;
+  --black: #000;
+  --green: #7dd71d;
+}
+
+.infoBox {
+  flex: 1;
+  cursor: pointer;
+  border: 10px solid transparent;
+  box-sizing: border-box;
+}
+
+.infoBox:not(:last-child) {
+  margin-right: 10px;
+}
+
+.infoBox.deaths .infoBox__lastday {
+  color: var(--black);
+}
+.infoBox.recovered .infoBox__lastday {
+  color: var(--green);
+}
+.infoBox.cases .infoBox__lastday {
+  color: var(--red);
+}
+
+.infoBox.cases.active {
+  border-color: var(--red);
+  transition: all 0.3s ease;
+}
+.infoBox.recovered.active {
+  border-color: var(--green);
+  transition: all 0.3s ease;
+}
+.infoBox.deaths.active {
+  border-color: var(--black);
+  transition: all 0.3s ease;
+}
+
+.infoBox__lastday {
+  font-weight: 600;
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.infoBox.active .infoBox__lastday {
+  font-weight: 800;
+  transition: all 0.3s ease;
+}
+
+.infoBox__total {
+  color: #6c767d;
+  font-weight: 700 !important;
+  font-size: 0.8rem !important;
+  margin-top: 15px !important;
+}

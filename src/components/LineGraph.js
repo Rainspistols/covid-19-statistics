@@ -47,21 +47,36 @@ const options = {
   },
 };
 
+const casesTypeColors = {
+  cases: {
+    border: '#cc1034',
+    background: 'rgba(204,16,52,0.6)',
+  },
+  recovered: {
+    border: '#7dd71d',
+    background: 'rgba(125,215,29,0.6)',
+  },
+  deaths: {
+    border: 'black',
+    background: 'rgba(0,0,0,0.6)',
+  },
+};
+
 function LineGraph({ casesType = 'cases' }) {
   const [data, setData] = useState({});
 
-  const buildChartData = (data, casesType = 'cases') => {
+  const buildChartData = (data, casesType) => {
     const chartData = [];
     let lastDataPoint;
 
     for (let date in data.cases) {
       if (lastDataPoint) {
-        console.log(date);
         const newDataPoint = {
           x: date,
           y: data[casesType][date] - lastDataPoint,
         };
         chartData.push(newDataPoint);
+        console.log(newDataPoint.y);
       }
       lastDataPoint = data[casesType][date];
     }
@@ -72,22 +87,21 @@ function LineGraph({ casesType = 'cases' }) {
     fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=120')
       .then((response) => response.json())
       .then((data) => {
-        let chartData = buildChartData(data);
+        let chartData = buildChartData(data, casesType);
         setData(chartData);
       });
   }, [casesType]);
 
   return (
     <div>
-      <h2>graph</h2>
       {data?.length > 0 && (
         <Line
           options={options}
           data={{
             datasets: [
               {
-                backgroundColor: 'rgba(204,16,52,0.5)',
-                borderColor: '#CC1034',
+                backgroundColor: `${casesTypeColors[casesType].background}`,
+                borderColor: `${casesTypeColors[casesType].border}`,
                 data: data,
               },
             ],

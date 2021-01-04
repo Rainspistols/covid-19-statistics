@@ -1,3 +1,5 @@
+import numeral from 'numeral';
+
 export const sortData = (data) => {
   const sortedData = [...data];
 
@@ -5,3 +7,8 @@ export const sortData = (data) => {
 
   return sortedData;
 };
+
+export const prettyPrintStat = (stat) =>
+  stat ? `+${numeral(stat).format('0.0a')}` : 0;
+
+
