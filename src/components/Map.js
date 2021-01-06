@@ -27,8 +27,8 @@ const casesTypeColors = {
 function DataOnMap({ data, casesType }) {
   return (
     <>
-      {data.map((country) => (
-        <Circle
+      {data.map((country, index) => (
+        <Circle key={index}
           pathOptions={{
             color: casesTypeColors[casesType].hex,
             fill: casesTypeColors[casesType].hex,

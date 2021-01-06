@@ -1,8 +1,15 @@
 .table {
+  margin: 0;
+  width: 100%;
+}
+
+.table tbody {
   margin-top: 20px;
   overflow: scroll;
   height: 400px;
   color: #6a5d5d;
+  display: block;
+  width: 100%;
 }
 
 .table tr {
