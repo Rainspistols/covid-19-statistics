@@ -7,7 +7,6 @@
 .infoBox {
   flex: 1;
   cursor: pointer;
-  border: 10px solid transparent;
   box-sizing: border-box;
 }
 
@@ -25,16 +24,26 @@
   color: var(--red);
 }
 
-.infoBox.cases.active {
+.infoBox.deaths,
+.infoBox.recovered,
+.infoBox.cases {
+  border-top: 10px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.infoBox.active.cases {
   border-color: var(--red);
-  transition: all 0.3s ease;
 }
-.infoBox.recovered.active {
+.infoBox.active.recovered {
   border-color: var(--green);
-  transition: all 0.3s ease;
 }
-.infoBox.deaths.active {
+.infoBox.active.deaths {
   border-color: var(--black);
+}
+
+.infoBox.active.cases,
+.infoBox.active.recovere,
+.infoBox.active.deaths {
   transition: all 0.3s ease;
 }
 

@@ -18,6 +18,6 @@ function InfoBox({ title, cases, total, casesType, type, ...props }) {
       </CardContent>
     </Card>
   );
-}
+} 
 
 export default InfoBox;

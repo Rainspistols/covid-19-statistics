@@ -76,7 +76,6 @@ function LineGraph({ casesType = 'cases' }) {
           y: data[casesType][date] - lastDataPoint,
         };
         chartData.push(newDataPoint);
-        console.log(newDataPoint.y);
       }
       lastDataPoint = data[casesType][date];
     }
@@ -93,7 +92,7 @@ function LineGraph({ casesType = 'cases' }) {
   }, [casesType]);
 
   return (
-    <div>
+    <div className='lineGraph'>
       {data?.length > 0 && (
         <Line
           options={options}

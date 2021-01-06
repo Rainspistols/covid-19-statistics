@@ -57,7 +57,6 @@ function App() {
 
   const onSelectedCountryChange = async (event) => {
     const countryCode = event.target.value;
-    console.log(event.target.value);
 
     const url =
       countryCode === 'worldwide'
@@ -95,7 +94,7 @@ function App() {
         <div className="app__stats">
           <InfoBox
             className="infoBox__cases"
-            onClick={(e) => setCasesType('cases')}
+            onClick={() => setCasesType('cases')}
             title="Coronavirus Cases"
             cases={prettyPrintStat(countryInfo.todayCases)}
             total={prettyPrintStat(countryInfo.cases)}
@@ -103,7 +102,7 @@ function App() {
             type="cases"
           />
           <InfoBox
-            onClick={(e) => setCasesType('recovered')}
+            onClick={() => setCasesType('recovered')}
             title="Recovered"
             cases={prettyPrintStat(countryInfo.todayRecovered)}
             total={prettyPrintStat(countryInfo.recovered)}
@@ -111,7 +110,7 @@ function App() {
             type="recovered"
           />
           <InfoBox
-            onClick={(e) => setCasesType('deaths')}
+            onClick={() => setCasesType('deaths')}
             title="Deaths"
             cases={prettyPrintStat(countryInfo.todayDeaths)}
             total={prettyPrintStat(countryInfo.deaths)}
@@ -126,11 +125,9 @@ function App() {
         <CardContent>
           <h3>Live Cases by Country</h3>
           <Table countries={tableData} />
-          <h3>Worldwide new {casesType} for last 120 days</h3>
+          <h3 className="app__graphTitle">Worldwide new {casesType} for last 120 days</h3>
           <LineGraph casesType={casesType} />
         </CardContent>
-        {/* Table */}
-        {/* Graph */}
       </Card>
     </div>
   );
